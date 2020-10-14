@@ -66,6 +66,7 @@ public class Main {
 
 			System.out.println(player1.getName() + " Has " + player1.getChips() + " chips");
 			System.out.println(player2.getName() + " Has " + player2.getChips() + " chips");
+			System.out.print("\n");
 
 			if (player1Turn) {
 				
@@ -93,6 +94,15 @@ public class Main {
 			if (initialStack <= 0) {
 				gameOver = true;
 				System.out.println("Game over");
+				System.out.println("Chips left in stack " + initialStack);
+				if(player1.getChips() % 2 == 0) {
+					System.out.println("Player 1 is winner ");
+				}
+				else {
+					System.out.println("Player 2 is winner");
+				}
+	
+				
 			}
 
 		}
