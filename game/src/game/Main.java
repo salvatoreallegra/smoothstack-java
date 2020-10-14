@@ -61,27 +61,39 @@ public class Main {
 
 		// game loop
 		while (!gameOver) {
-			
+
 			int eligibleRemoval = 0;
-			
+
 			System.out.println(player1.getName() + " Has " + player1.getChips() + " chips");
 			System.out.println(player2.getName() + " Has " + player2.getChips() + " chips");
 
 			if (player1Turn) {
+				
 				System.out.println("It's your turn " + player1.getName());
 				maxEligibleRemoval = (initialStack - 1) / 2;
 				System.out.println("Remove Chips from the pile...between this amount...1 and " + maxEligibleRemoval);
 				removedChips = sc.nextInt();
 				initialStack -= removedChips;
-				System.out.println(initialStack);
-				player2Turn = true;
-			}
-			else {
+				player1.setChips(player1.getChips() + removedChips);
+				player1Turn = false;
 				
+			} else {
+
+				System.out.println("It's your turn " + player2.getName());
+				maxEligibleRemoval = (initialStack - 1) / 2;
+				System.out.println("Remove Chips from the pile...between this amount...1 and " + maxEligibleRemoval);
+				removedChips = sc.nextInt();
+				System.out.println("Removed Chips " + removedChips);
+				initialStack -= removedChips;
+				player2.setChips(player2.getChips() + removedChips);
+				player1Turn = true;
+
 			}
 
-			System.out.println("Game over");
-			gameOver = true;
+			if (initialStack <= 0) {
+				gameOver = true;
+				System.out.println("Game over");
+			}
 
 		}
 	}
