@@ -15,6 +15,7 @@ public class Main {
 		int initialStack = 0;
 		int maxEligibleRemoval = 0;
 		int removedChips = 0;
+		String playAgain = "";
 
 		boolean player1Turn = true;
 		boolean player2Turn = false;
@@ -58,54 +59,55 @@ public class Main {
 
 		Player player1 = new Player(playerOneName);
 		Player player2 = new Player(playerTwoName);
-
+		
 		// game loop
-		while (!gameOver) {
-
-			int eligibleRemoval = 0;
-
-			System.out.println(player1.getName() + " Has " + player1.getChips() + " chips");
-			System.out.println(player2.getName() + " Has " + player2.getChips() + " chips");
-			System.out.print("\n");
-
-			if (player1Turn) {
-				
-				System.out.println("It's your turn " + player1.getName());
-				maxEligibleRemoval = (initialStack - 1) / 2;
-				System.out.println("Remove Chips from the pile...between this amount...1 and " + maxEligibleRemoval);
-				removedChips = sc.nextInt();
-				initialStack -= removedChips;
-				player1.setChips(player1.getChips() + removedChips);
-				player1Turn = false;
-				
-			} else {
-
-				System.out.println("It's your turn " + player2.getName());
-				maxEligibleRemoval = (initialStack - 1) / 2;
-				System.out.println("Remove Chips from the pile...between this amount...1 and " + maxEligibleRemoval);
-				removedChips = sc.nextInt();
-				System.out.println("Removed Chips " + removedChips);
-				initialStack -= removedChips;
-				player2.setChips(player2.getChips() + removedChips);
-				player1Turn = true;
-
-			}
-
-			if (initialStack <= 0) {
-				gameOver = true;
-				System.out.println("Game over");
-				System.out.println("Chips left in stack " + initialStack);
-				if(player1.getChips() % 2 == 0) {
-					System.out.println("Player 1 is winner ");
-				}
-				else {
-					System.out.println("Player 2 is winner");
+			while (!gameOver) {
+	
+				int eligibleRemoval = 0;
+	
+				System.out.println(player1.getName() + " Has " + player1.getChips() + " chips");
+				System.out.println(player2.getName() + " Has " + player2.getChips() + " chips");
+				System.out.print("\n");
+	
+				if (player1Turn) {
+	
+					System.out.println("It's your turn " + player1.getName());
+					maxEligibleRemoval = (initialStack - 1) / 2;
+					System.out.println("Remove Chips from the pile...between this amount...1 and " + maxEligibleRemoval);
+					removedChips = sc.nextInt();
+					initialStack -= removedChips;
+					player1.setChips(player1.getChips() + removedChips);
+					player1Turn = false;
+	
+				} else {
+	
+					System.out.println("It's your turn " + player2.getName());
+					maxEligibleRemoval = (initialStack - 1) / 2;
+					System.out.println("Remove Chips from the pile...between this amount...1 and " + maxEligibleRemoval);
+					removedChips = sc.nextInt();
+					System.out.println("Removed Chips " + removedChips);
+					initialStack -= removedChips;
+					player2.setChips(player2.getChips() + removedChips);
+					player1Turn = true;
+	
 				}
 	
-				
-			}
+				if (initialStack <= 0) {
+					gameOver = true;
+					System.out.println("Game over");
+					System.out.println("Chips left in stack " + initialStack);
+					if (player1.getChips() % 2 == 0) {
+						System.out.println("Player 1 is winner ");
+					} else {
+						System.out.println("Player 2 is winner");
+					}
+	
+				}
+	
+			} // end while loop
+			
+		
 
-		}
-	}
+	} // end main method
 
-}
+} // end class
