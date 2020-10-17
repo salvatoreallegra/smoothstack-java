@@ -1,5 +1,5 @@
 package com.salallegra.library.Entity;
 
-public class Test {
+public class Genre {
 
 }

@@ -1,12 +1,25 @@
+/**
+ * 
+ */
 package com.salallegra.library.dao;
-import java.sql.PreparedStatement;
+
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.salallegra.library.Entity.Author;
 
-public class AuthorDao extends BaseDao<Author> {
+/**
+ * @author Sal Allegra
+ *
+ */
+public class AuthorDAO extends BaseDAO<Author> {
+
+	public AuthorDAO(Connection conn) {
+		super(conn);
+	}
 
 	public void addAuthor(Author author) throws ClassNotFoundException, SQLException {
 		save("INSERT INTO tbl_author (authorName) VALUES (?)", new Object[] { author.getAuthorName() });
@@ -29,6 +42,10 @@ public class AuthorDao extends BaseDao<Author> {
 		searchString = "%"+searchString+"%";
 		return read("SELECT * FROM tbl_author WHERE authorName LIKE ?", new Object[] {searchString});
 	}
+	
+	public void addBookAuthors(Integer bookId, Integer authorId) throws ClassNotFoundException, SQLException {
+		save("INSERT INTO tbl_book_authors VALUES (?, ?)", new Object[] { bookId, authorId });
+	}
 
 	@Override
 	public List<Author> extractData(ResultSet rs) throws SQLException {
@@ -39,3 +56,4 @@ public class AuthorDao extends BaseDao<Author> {
 		}
 		return authors;
 	}
+}
