@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.salallegra.library.service.AdministratorService;
+import com.salallegra.library.service.LibrarianService;
 import com.salallegra.library.Entity.Book;
+import com.salallegra.library.Entity.Branch;
 
 public class Menus {
 	
@@ -50,13 +52,19 @@ public class Menus {
 	
 	//This is the top level menu of 
 	public void displayMainLibraryMenu() {
-		System.out.println("1) Enter the branch you manage ");
+		LibrarianService service = new LibrarianService();
+		System.out.println("1) Enter the branch number you manage ");
 		System.out.println("2) Quit to return to main menu ");
 		int selection = sc.nextInt();
 		
+		 List<Branch> branches = service.getAllBranches();
+		 for (Branch b : branches) {
+				System.out.println("Branches: " + b.getBranchID() + " " + b.getBranchName());
+			}
+		
 		switch(selection) {
 		   case 1 :
-		      // Statements
+		    
 		      break; // optional
 		   
 		   case 2 :

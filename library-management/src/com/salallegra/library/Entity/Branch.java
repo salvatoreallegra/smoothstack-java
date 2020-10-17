@@ -2,14 +2,20 @@ package com.salallegra.library.Entity;
 
 public class Branch {
 	
-	Integer branchID;
+	Integer branchId;
 	String branchName;
 	String branchAddress;
+	
+	public Branch(int branchId,String branchName, String branchAddress) {
+		this.branchId = branchId;
+		this.branchName = branchName;
+		this.branchAddress = branchAddress;
+	}
 	public Integer getBranchID() {
-		return branchID;
+		return branchId;
 	}
 	public void setBranchID(Integer branchID) {
-		this.branchID = branchID;
+		this.branchId = branchID;
 	}
 	public String getBranchName() {
 		return branchName;

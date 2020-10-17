@@ -2,11 +2,14 @@ package com.salallegra.library.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.salallegra.library.Entity.Author;
 import com.salallegra.library.Entity.Book;
+import com.salallegra.library.Entity.Branch;
 import com.salallegra.library.dao.AuthorDAO;
 import com.salallegra.library.dao.BookDAO;
+import com.salallegra.library.dao.BranchDAO;
 
 public class LibrarianService {
 
@@ -43,4 +46,19 @@ public class LibrarianService {
 			}
 		}
 	}
+
+	public List<Branch> getAllBranches() {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BranchDAO branchDAO = new BranchDAO(conn);
+			return branchDAO.readAllBranches();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
 }
