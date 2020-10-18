@@ -1,23 +1,16 @@
 package com.salallegra.library.ui;
 
 import java.util.List;
-
 import java.util.Scanner;
 
-import com.salallegra.library.Entity.Copies;
-
-import com.salallegra.library.service.AdministratorService;
-import com.salallegra.library.service.LibrarianService;
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Branch;
+import com.salallegra.library.Entity.Copies;
+import com.salallegra.library.service.AdministratorService;
+import com.salallegra.library.service.LibrarianService;
 
-/**
- * 
- * @author salal These Menus will display all system choices and perform all
- *         actions by calling Service class methods.
- */
-public class Menus {
-
+public class LibraryMenus {
+	
 	Scanner sc = new Scanner(System.in);
 
 	public void showBooks() {
@@ -28,29 +21,7 @@ public class Menus {
 		}
 	}
 
-	public void displayMainMenu() {
-
-		System.out.println("Welcome to the SS Library Management System ");
-		System.out.println("1) Librarian ");
-		System.out.println("2) Administrator ");
-		System.out.println("3) Borrower ");
-		System.out.println("Please Enter Your Selection ");
-		int selection = sc.nextInt();
-		sc.nextLine();
-
-		switch (selection) {
-		case 1:
-			LibraryMenus libMenu = new LibraryMenus();
-			
-			libMenu.lib1();;
-			break; // optional
-
-		// You can have any number of case statements.
-		default:
-			System.out.println("Invalid entry, please enter 1,2 or 3");
-		}
-
-	}
+	Menus mainMenu = new Menus();
 
 	// This is the top level menu of
 	public void lib1() {
@@ -66,7 +37,7 @@ public class Menus {
 			break; // optional
 
 		case 2:
-			displayMainMenu();
+			mainMenu.displayMainMenu();
 			break; // optional
 
 		default:
@@ -83,17 +54,21 @@ public class Menus {
 		for (Branch b : branches) {
 			System.out.println("Branches: " + b.getBranchID() + " " + b.getBranchName());
 		}
+		
 		int quitIndex = branches.size() + 1;
 
 		System.out.println(quitIndex + ") Quit to previous...");
+		
 		int selection = sc.nextInt();
-		int branchSelection = selection - 1;
 		sc.nextLine();
+		
+		int branchSelection = selection - 1;
+		
 		System.out.println("selection " + selection);
 		if (selection == quitIndex) {
 			lib1();
 		} else {
-			String branchName = branches.get(selection).getBranchName();
+			String branchName = branches.get(branchSelection).getBranchName();
 			System.out.println(branchName);
 			lib3(branchSelection, branchName);
 		}
@@ -165,4 +140,5 @@ public class Menus {
 		}
 
 	}
+
 }
