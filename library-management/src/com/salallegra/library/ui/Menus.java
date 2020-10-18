@@ -43,14 +43,6 @@ public class Menus {
 			lib1();
 			break; // optional
 
-		case 2:
-			// Statements
-			break; // optional
-
-		case 3:
-			// Statements
-			break; // optional
-
 		// You can have any number of case statements.
 		default:
 			System.out.println("Invalid entry, please enter 1,2 or 3");
@@ -90,17 +82,24 @@ public class Menus {
 			System.out.println("Branches: " + b.getBranchID() + " " + b.getBranchName());
 		}
 		int quitIndex = branches.size() + 1;
+		
 		System.out.println(quitIndex + ") Quit to previous...");
-
-		int selection = sc.nextInt() - 1;
+		int selection = sc.nextInt();
+		int branchSelection = selection -1;
 		sc.nextLine();
-		String branchName = branches.get(selection).getBranchName();
-		System.out.println(branchName);
-		if (selection == quitIndex) {
+		System.out.println("selection " + selection);
+		if(selection==quitIndex) {
 			lib1();
-		} else {
-			lib3(selection, branchName);
 		}
+		else {
+			String branchName = branches.get(selection).getBranchName();
+			System.out.println(branchName);
+			lib3(branchSelection, branchName);
+		}
+		
+		
+		
+			
 
 	}
 
@@ -133,6 +132,7 @@ public class Menus {
 			Branch branch = new Branch(displayBranchId, newBranchName, newBranchAddress);
 			System.out.println(branch.getBranchID() + branch.getBranchAddress() + branch.getBranchName());
 			libService.updateBranch(branch);
+			lib2();
 
 			break; // optional
 
@@ -149,7 +149,14 @@ public class Menus {
 			for (Copies c : copies) {
 				System.out.println("Number of Copies... " + c.getNoCopies());
 			}
-			
+			System.out.println("Enter a new number of copies to update...");
+			int copiesTotal = sc.nextInt();
+			sc.nextLine();
+			Copies copy = new Copies(bookId, copiesTotal);
+			libService.updateCopy(copy);
+			System.out.println("Number of copies updated!");
+			lib3(branchID,branchName);
+
 			break; // optional
 		case 3:
 			lib2();

@@ -104,5 +104,20 @@ public class LibrarianService {
 		}
 		
 	}
+	
+	public void updateCopy(Copies copy) {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			CopiesDAO copiesDAO = new CopiesDAO(conn);
+			copiesDAO.updateCopies(copy);
+			conn.commit();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
 
 }

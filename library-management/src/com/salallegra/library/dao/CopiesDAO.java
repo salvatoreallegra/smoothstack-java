@@ -38,7 +38,12 @@ public class CopiesDAO extends BaseDAO<Copies>{
 	public List<Copies> getBookCopy(int bookId) throws SQLException, ClassNotFoundException{
 		return read("SELECT bookId,branchId,noOfCopies "
 				+ "FROM tbl_book_copies "
-				+ "WHERE bookId = 1",null);
+				+ "WHERE bookId = " + bookId,null);
+	}
+	
+	public void updateCopies(Copies copies) throws ClassNotFoundException, SQLException {
+		save("UPDATE tbl_book_copies SET noOfCopies = ? WHERE bookId = ?",
+				new Object[] {  copies.getNoCopies(),copies.getBookId() });
 	}
 	
 	public List<Copies> readAllBooksByName(String searchString) throws SQLException, ClassNotFoundException {

@@ -11,6 +11,11 @@ public class Copies {
 		this.branchID = branchID;
 		this.noCopies = noCopies;
 	}
+	
+	public Copies(Integer bookId, Integer noCopies) {
+		this.bookId = bookId;
+		this.noCopies = noCopies;
+	}
 	public Integer getNoCopies() {
 		return noCopies;
 	}
@@ -32,12 +37,7 @@ public class Copies {
 	public void setBranchID(Integer branchID) {
 		this.branchID = branchID;
 	}
-	public Integer getNoOfCopies() {
-		return noOfCopies;
-	}
-	public void setNoOfCopies(Integer noOfCopies) {
-		this.noOfCopies = noOfCopies;
-	}
-	private Integer noOfCopies;
+	
+	
 	
 }

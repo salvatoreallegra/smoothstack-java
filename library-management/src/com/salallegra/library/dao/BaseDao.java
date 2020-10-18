@@ -27,17 +27,16 @@ public abstract class BaseDAO<T> {
 		
 		if(vals !=null) {
 
-			String branchName = (String) vals[0];
-			Integer branchId = (Integer) vals[1];
-			pstmt.setString(1, branchName);
-			pstmt.setInt(2, branchId);
-			System.out.println("Not equal to null");
-//			int count = 1;
-//			for(Object o: vals) {
-//				pstmt.setObject(count, o);
-//				count++;
-//				System.out.println("o values " + o);
-//			}
+			
+//			pstmt.setString(1, branchName);
+//			pstmt.setInt(2, branchId);
+			
+			int count = 1;
+			for(Object o: vals) {
+				pstmt.setObject(count, o);
+				count++;
+				System.out.println("o values " + o);
+			}
 			
 		}
 		else {
