@@ -2,20 +2,35 @@ package com.salallegra.library.Entity;
 
 public class Copies {
 	
-	private Book book;
-	private Branch branch;
-	private Integer noOfCopies;
-	public Book getBook() {
-		return book;
+	private Integer bookId;
+	private Integer branchID;
+	private Integer noCopies;
+	
+	public Copies(Integer bookId, Integer branchID, Integer noCopies) {
+		this.bookId = bookId;
+		this.branchID = branchID;
+		this.noCopies = noCopies;
 	}
-	public void setBook(Book book) {
-		this.book = book;
+	public Integer getNoCopies() {
+		return noCopies;
 	}
-	public Branch getBranch() {
-		return branch;
+
+	public void setNoCopies(Integer noCopies) {
+		this.noCopies = noCopies;
 	}
-	public void setBranch(Branch branch) {
-		this.branch = branch;
+
+	public Integer getBookId() {
+		return bookId;
+	}
+	
+	public void setBookId(Integer bookId) {
+		this.bookId = bookId;
+	}
+	public Integer getBranchID() {
+		return branchID;
+	}
+	public void setBranchID(Integer branchID) {
+		this.branchID = branchID;
 	}
 	public Integer getNoOfCopies() {
 		return noOfCopies;
@@ -23,5 +38,6 @@ public class Copies {
 	public void setNoOfCopies(Integer noOfCopies) {
 		this.noOfCopies = noOfCopies;
 	}
-
+	private Integer noOfCopies;
+	
 }

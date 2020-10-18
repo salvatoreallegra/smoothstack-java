@@ -4,6 +4,8 @@ import java.util.List;
 
 import java.util.Scanner;
 
+import com.salallegra.library.Entity.Copies;
+
 import com.salallegra.library.service.AdministratorService;
 import com.salallegra.library.service.LibrarianService;
 import com.salallegra.library.Entity.Book;
@@ -143,7 +145,10 @@ public class Menus {
 			int bookId = sc.nextInt();
 			sc.nextLine();
 			System.out.println("Existing # of copies");
-			libService.getBookCopies(bookId);
+			List<Copies> copies = libService.getBookCopies(bookId);
+			for (Copies c : copies) {
+				System.out.println("Number of Copies... " + c.getNoCopies());
+			}
 			
 			break; // optional
 		case 3:

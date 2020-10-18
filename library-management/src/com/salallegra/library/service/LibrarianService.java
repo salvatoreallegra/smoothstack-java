@@ -7,9 +7,11 @@ import java.util.List;
 import com.salallegra.library.Entity.Author;
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Branch;
+import com.salallegra.library.Entity.Copies;
 import com.salallegra.library.dao.AuthorDAO;
 import com.salallegra.library.dao.BookDAO;
 import com.salallegra.library.dao.BranchDAO;
+import com.salallegra.library.dao.CopiesDAO;
 
 public class LibrarianService {
 
@@ -74,12 +76,12 @@ public class LibrarianService {
 
 	}
 	
-	public List<Book> getBookCopies(int id) {
+	public List<Copies> getBookCopies(int id) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
-			BookDAO bookDAO = new BookDAO(conn);
-			return bookDAO.getBookCopy(id);
+			CopiesDAO copiesDAO = new CopiesDAO(conn);
+			return copiesDAO.getBookCopy(id);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
