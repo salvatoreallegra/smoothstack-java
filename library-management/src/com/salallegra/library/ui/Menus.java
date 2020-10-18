@@ -40,10 +40,13 @@ public class Menus {
 
 		switch (selection) {
 		case 1:
-			LibraryMenus libMenu = new LibraryMenus();
-			
+			LibraryMenus libMenu = new LibraryMenus();			
 			libMenu.lib1();;
-			break; // optional
+			break;
+		case 3:
+			BorrowerMenus borMenu = new BorrowerMenus();
+			borMenu.Borr1();			
+			break;
 
 		// You can have any number of case statements.
 		default:
