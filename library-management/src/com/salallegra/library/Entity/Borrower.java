@@ -7,11 +7,14 @@ public class Borrower {
 	private String address;
 	private String phone;
 
-	public Borrower() {
+	public Borrower(Integer cardNo, String name, String address, String phone) {
 		this.cardNo = cardNo;
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
+	}
+	public Borrower(Integer cardNo) {
+		this.cardNo = cardNo;
 	}
 
 	public Integer getCardNo() {

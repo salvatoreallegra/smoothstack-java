@@ -7,6 +7,7 @@ import java.util.List;
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Borrower;
 import com.salallegra.library.dao.BookDAO;
+import com.salallegra.library.dao.BorrowerDAO;
 
 public class BorrowerService {
 	
@@ -17,8 +18,8 @@ public class BorrowerService {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
-			BookDAO bookDAO = new BookDAO(conn);
-			return bookDAO.readAllBooks();
+			BorrowerDAO borrowerDAO = new BorrowerDAO(conn);
+			return borrowerDAO.readAllCardNos();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
