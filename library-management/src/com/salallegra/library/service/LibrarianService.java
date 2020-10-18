@@ -74,12 +74,27 @@ public class LibrarianService {
 
 	}
 	
+	public List<Book> getBookCopies(int id) {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BookDAO bookDAO = new BookDAO(conn);
+			return bookDAO.getBookCopy(id);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
 	public void updateBranch(Branch branch) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
 			BranchDAO branchDAO = new BranchDAO(conn);
 			branchDAO.updateBranch(branch);
+			conn.commit();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
