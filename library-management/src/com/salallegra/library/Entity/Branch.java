@@ -6,7 +6,7 @@ public class Branch {
 	String branchName;
 	String branchAddress;
 	
-	public Branch(int branchId,String branchName, String branchAddress) {
+	public Branch(Integer branchId,String branchName, String branchAddress) {
 		this.branchId = branchId;
 		this.branchName = branchName;
 		this.branchAddress = branchAddress;

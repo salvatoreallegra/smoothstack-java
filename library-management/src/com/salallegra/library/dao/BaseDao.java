@@ -24,15 +24,38 @@ public abstract class BaseDAO<T> {
 	
 	public void save(String sql, Object[] vals) throws ClassNotFoundException, SQLException {
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
 		if(vals !=null) {
-			int count = 1;
-			for(Object o: vals) {
-				pstmt.setObject(count, o);
-				count++;
-			}
+
+			String branchName = (String) vals[0];
+			Integer branchId = (Integer) vals[1];
+			pstmt.setString(1, branchName);
+			pstmt.setInt(2, branchId);
+			System.out.println("Not equal to null");
+//			int count = 1;
+//			for(Object o: vals) {
+//				pstmt.setObject(count, o);
+//				count++;
+//				System.out.println("o values " + o);
+//			}
+			
+		}
+		else {
+			System.out.println("Null");
 		}
 		pstmt.executeUpdate();
 	}
+	
+	//This is a workaround method I made since I couldn't get it to work with Pramods code
+	
+	public void updateTable(Object object) throws ClassNotFoundException, SQLException {
+
+	    String SQL_UPDATE = "UPDATE tbl_library_branch SET branchName=? WHERE branchId=?";
+		PreparedStatement pstmt = conn.prepareStatement(SQL_UPDATE);
+		
+		
+	}
+	
 	
 	public Integer saveWithPk(String sql, Object[] vals) throws ClassNotFoundException, SQLException {
 		PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

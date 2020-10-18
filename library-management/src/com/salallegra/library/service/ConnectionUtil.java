@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class ConnectionUtil {
 	
-	public String driverName = "com.mysql.jdbc.Driver";
+	public String driverName = "com.mysql.cj.jdbc.Driver";
 	public String url = "jdbc:mysql://localhost:3306/library?useSSL=false";
 	public String userName = "root";
 	public String password = "JediKnight1";

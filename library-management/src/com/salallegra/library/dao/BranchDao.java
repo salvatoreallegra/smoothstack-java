@@ -24,10 +24,11 @@ public class BranchDAO extends BaseDAO<Branch> {
 //		save("INSERT INTO tbl_author (authorName) VALUES (?)", new Object[] { author.getAuthorName() });
 //	}
 //
-//	public void updateAuthor(Author author) throws ClassNotFoundException, SQLException {
-//		save("UPDATE tbl_author SET authorName = ? WHERE authorId = ?",
-//				new Object[] { author.getAuthorName(), author.getAuthorId() });
-//	}
+	public void updateBranch(Branch branch) throws ClassNotFoundException, SQLException {
+		System.out.println("In DAO " + branch.getBranchAddress() + "Id " + branch.getBranchID());
+		save("UPDATE tbl_library_branch SET branchName = ? WHERE branchId = ?",
+				new Object[] { branch.getBranchName(), branch.getBranchID() });
+	}
 //
 //	public void deleteAuthor(Author author) throws ClassNotFoundException, SQLException {
 //		save("DELETE FROM tbl_author WHERE authorId = ?", new Object[] { author.getAuthorId() });
@@ -36,6 +37,8 @@ public class BranchDAO extends BaseDAO<Branch> {
 	public List<Branch> readAllBranches() throws SQLException, ClassNotFoundException {
 		return read("SELECT * FROM tbl_library_branch", null);
 	}
+	
+	
 //	
 //	public List<Author> readAllAuthorsByName(String searchString) throws SQLException, ClassNotFoundException {
 //		searchString = "%"+searchString+"%";

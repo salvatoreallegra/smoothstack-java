@@ -60,5 +60,32 @@ public class LibrarianService {
 		}
 
 	}
+	public List<Book> getAllBooks() {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BookDAO bookDAO = new BookDAO(conn);
+			return bookDAO.readAllBooks();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	
+	public void updateBranch(Branch branch) {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BranchDAO branchDAO = new BranchDAO(conn);
+			branchDAO.updateBranch(branch);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
 
 }
