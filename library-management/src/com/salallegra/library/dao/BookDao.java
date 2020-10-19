@@ -55,6 +55,12 @@ public class BookDAO extends BaseDAO<Book>{
 				+ "INNER JOIN tbl_book_copies ON tbl_book.bookId=tbl_book_copies.bookId"
 				+ "WHERE tbl_book.bookId = 1",null);
 	}
+	public List<Book> getCheckedOutBooks(int cardNo) throws SQLException, ClassNotFoundException{
+		return read("SELECT tbl_book.bookId, tbl_book.title "
+				+ "FROM tbl_book "
+				+ "INNER JOIN tbl_book_loans ON tbl_book.bookId=tbl_book_loans.bookId "
+				+ "WHERE tbl_book_loans.cardNo = 1111",null);
+	}
 	
 	public List<Book> readAllBooksByName(String searchString) throws SQLException, ClassNotFoundException {
 		searchString = "%"+searchString+"%";

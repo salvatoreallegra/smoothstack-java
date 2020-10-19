@@ -47,7 +47,7 @@ public class BorrowerMenus {
 			break; // optional
 
 		case 2:
-			mainMenu.displayMainMenu();
+			returnBook(cardNo);
 			break; // optional
 		case 3:
 			mainMenu.displayMainMenu();
@@ -87,30 +87,55 @@ public class BorrowerMenus {
 		boolean bookCheckOut = bs.checkOutBook(loan);
 		if (!bookCheckOut) {
 			System.out.println("Book has been successfully checked out...");
-		}
-		else {
-			
+		} else {
 			System.out.println("You've already checked out this book at this branch");
 			Borr1();
 		}
 		Borr1();
 
-//		switch (branchChoice) {
-//		case 1:
-//			pickBranch();
-//			break; // optional
-//
-//		case 2:
-//			mainMenu.displayMainMenu();
-//			break; // optional
-//		case 3:
-//			mainMenu.displayMainMenu();
-//			break; // optional
-//
-//		default:
-//			System.out.println("Invalid entry, please enter 1,2 or 3");
-//			//lib1();
+//		
+
+	}
+
+	public void returnBook(int cardNo) {
+		System.out.println("Pick the branch you want to check into");
+		LibrarianService libService = new LibrarianService();
+		List<Branch> branches = libService.getAllBranches();
+		for (Branch b : branches) {
+			System.out.println(b.getBranchID() + ") " + b.getBranchName());
+		}
+		int menuIndex = branches.size() + 1;
+		System.out.println(menuIndex + ")" + "Back to main menu");
+		int branchChoice = sc.nextInt();
+		if (branchChoice == menuIndex) {
+			Borr1();
+		}
+//		System.out.println("Pick the book you want to check in....");
+//		List<Book> books = bs.getAllBooksForBranch(branchChoice);
+//		for (Book b : books) {
+//			System.out.println(b.getBookId() + " " + b.getTitle());
 //		}
+//		int checkInBookId = sc.nextInt();
+//		sc.nextLine();
+//		LocalDate todaysDate = LocalDate.now();
+//		LocalDate dueDate = todaysDate.plusDays(7);
+//		
+		List<Book> checkedBooks = bs.getCheckedOutBooks(cardNo);
+		for (Book b : checkedBooks) {
+			System.out.println(b.getBookId() + b.getTitle());
+		}
+		
+		// System.out.println(checkOutBookId + " " + branchChoice + " " + cardNo + " " +
+		// todaysDate + " " + dueDate);
+		//Loan loan = new Loan(checkOutBookId, branchChoice, cardNo, todaysDate, dueDate, null);
+//		boolean bookCheckOut = bs.checkOutBook(loan);
+//		if (!bookCheckOut) {
+//			System.out.println("Book has been successfully checked out...");
+//		} else {
+//			System.out.println("You've already checked out this book at this branch");
+//			Borr1();
+//		}
+//		Borr1();
 
 	}
 

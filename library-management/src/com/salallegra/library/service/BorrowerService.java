@@ -65,5 +65,22 @@ public class BorrowerService {
 		}
 
 	}
+	public List<Book> getCheckedOutBooks(int cardNo) {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BookDAO bdao = new BookDAO(conn);
+			//return ldao.addLoan(loan);
+			return bdao.getCheckedOutBooks(cardNo);
+			//conn.commit();
+			
+
+		} catch (ClassNotFoundException | SQLException e) {
+			
+			System.out.println("Error, re-start the system");
+			return null;
+		}
+
+	}
 
 }
