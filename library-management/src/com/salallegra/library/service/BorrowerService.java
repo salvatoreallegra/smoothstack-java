@@ -38,7 +38,7 @@ public class BorrowerService {
 			return bookDAO.getAllBooksForBranch(branchId);
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 
@@ -47,7 +47,7 @@ public class BorrowerService {
 	 * checkOutBook will insert a new row into tbl_book_loans
 	 * this is part of the borrower module called from the Borrower Menu
 	 */
-	public void checkOutBook(Loan loan) {
+	public boolean checkOutBook(Loan loan) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
@@ -55,10 +55,13 @@ public class BorrowerService {
 			//return ldao.addLoan(loan);
 			ldao.addLoan(loan);
 			conn.commit();
+			return false;
 
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			
+			System.out.println("This book is already checked out");
 			//return null;
+			return true;
 		}
 
 	}

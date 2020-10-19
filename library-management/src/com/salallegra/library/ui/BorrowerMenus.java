@@ -1,9 +1,10 @@
 package com.salallegra.library.ui;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Borrower;
@@ -80,9 +81,20 @@ public class BorrowerMenus {
 		sc.nextLine();
 		LocalDate todaysDate = LocalDate.now();
 		LocalDate dueDate = todaysDate.plusDays(7);
-		System.out.println(checkOutBookId + " " + branchChoice + " " + cardNo + " " + todaysDate + " " + dueDate);
-		Loan loan = new Loan(checkOutBookId,branchChoice,cardNo,todaysDate, dueDate, null);
-		bs.checkOutBook(loan);
+		// System.out.println(checkOutBookId + " " + branchChoice + " " + cardNo + " " +
+		// todaysDate + " " + dueDate);
+		Loan loan = new Loan(checkOutBookId, branchChoice, cardNo, todaysDate, dueDate, null);
+		boolean bookCheckOut = bs.checkOutBook(loan);
+		if (!bookCheckOut) {
+			System.out.println("Book has been successfully checked out...");
+		}
+		else {
+			
+			System.out.println("You've already checked out this book at this branch");
+			Borr1();
+		}
+		Borr1();
+
 //		switch (branchChoice) {
 //		case 1:
 //			pickBranch();
