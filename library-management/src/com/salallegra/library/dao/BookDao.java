@@ -13,7 +13,7 @@ import com.salallegra.library.Entity.Book;
 
 
 /**
- * @book ppradhan
+ * @book salallegra
  *
  */
 public class BookDAO extends BaseDAO<Book>{
@@ -41,6 +41,13 @@ public class BookDAO extends BaseDAO<Book>{
 
 	public List<Book> readAllBooks() throws SQLException, ClassNotFoundException {
 		return read("SELECT * FROM tbl_book", null);
+	}
+	public List<Book> getAllBooksForBranch() throws SQLException,ClassNotFoundException{
+		return read("SELECT bk.bookId, bk.title  "
+				+ "From tbl_book bk "
+				+ "INNER JOIN tbl_book_copies on bk.bookId = tbl_book_copies.bookId "
+				+ "Where tbl_book_copies.noOfCopies > 0 and tbl_book_copies.branchId = 4",null);
+				
 	}
 	public List<Book> getBookCopy(int bookId) throws SQLException, ClassNotFoundException{
 		return read("SELECT tbl_book.title, tbl_book_copies.noOfCopies"
