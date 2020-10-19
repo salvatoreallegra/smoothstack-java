@@ -1,11 +1,14 @@
 package com.salallegra.library.ui;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Borrower;
 import com.salallegra.library.Entity.Branch;
+import com.salallegra.library.Entity.Loan;
 import com.salallegra.library.service.BorrowerService;
 import com.salallegra.library.service.LibrarianService;
 
@@ -39,7 +42,7 @@ public class BorrowerMenus {
 		sc.nextLine();
 		switch (choice) {
 		case 1:
-			pickBranch();
+			pickBranch(cardNo);
 			break; // optional
 
 		case 2:
@@ -51,11 +54,11 @@ public class BorrowerMenus {
 
 		default:
 			System.out.println("Invalid entry, please enter 1,2 or 3");
-			//lib1();
+			// lib1();
 		}
 	}
-	
-	public void pickBranch() {
+
+	public void pickBranch(int cardNo) {
 		System.out.println("Pick the branch you want to check out from");
 		LibrarianService libService = new LibrarianService();
 		List<Branch> branches = libService.getAllBranches();
@@ -65,15 +68,21 @@ public class BorrowerMenus {
 		int menuIndex = branches.size() + 1;
 		System.out.println(menuIndex + ")" + "Back to main menu");
 		int branchChoice = sc.nextInt();
-		if(branchChoice == menuIndex) {
+		if (branchChoice == menuIndex) {
 			Borr1();
 		}
 		System.out.println("Pick the book you want to check out....");
-		List<Book> books = bs.getAllBooksForBranch();
+		List<Book> books = bs.getAllBooksForBranch(branchChoice);
 		for (Book b : books) {
 			System.out.println(b.getBookId() + " " + b.getTitle());
 		}
-		
+		int checkOutBookId = sc.nextInt();
+		sc.nextLine();
+		LocalDate todaysDate = LocalDate.now();
+		LocalDate dueDate = todaysDate.plusDays(7);
+		System.out.println(checkOutBookId + " " + branchChoice + " " + cardNo + " " + todaysDate + " " + dueDate);
+		Loan loan = new Loan(checkOutBookId,branchChoice,cardNo,todaysDate, dueDate, null);
+		bs.checkOutBook(loan);
 //		switch (branchChoice) {
 //		case 1:
 //			pickBranch();
@@ -90,7 +99,7 @@ public class BorrowerMenus {
 //			System.out.println("Invalid entry, please enter 1,2 or 3");
 //			//lib1();
 //		}
-		
+
 	}
 
 }

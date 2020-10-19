@@ -42,7 +42,7 @@ public class BookDAO extends BaseDAO<Book>{
 	public List<Book> readAllBooks() throws SQLException, ClassNotFoundException {
 		return read("SELECT * FROM tbl_book", null);
 	}
-	public List<Book> getAllBooksForBranch() throws SQLException,ClassNotFoundException{
+	public List<Book> getAllBooksForBranch(int branchId) throws SQLException,ClassNotFoundException{
 		return read("SELECT bk.bookId, bk.title  "
 				+ "From tbl_book bk "
 				+ "INNER JOIN tbl_book_copies on bk.bookId = tbl_book_copies.bookId "
