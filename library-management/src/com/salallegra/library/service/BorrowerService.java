@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Borrower;
+import com.salallegra.library.Entity.Branch;
 import com.salallegra.library.Entity.Loan;
 import com.salallegra.library.dao.BookDAO;
 import com.salallegra.library.dao.BorrowerDAO;
+import com.salallegra.library.dao.BranchDAO;
 import com.salallegra.library.dao.LoansDAO;
 
 public class BorrowerService {
@@ -65,13 +67,13 @@ public class BorrowerService {
 		}
 
 	}
-	public List<Book> getCheckedOutBooks(int cardNo) {
+	public List<Book> getCheckedOutBooks(int cardNo, int branchId) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
 			BookDAO bdao = new BookDAO(conn);
 			//return ldao.addLoan(loan);
-			return bdao.getCheckedOutBooks(cardNo);
+			return bdao.getCheckedOutBooks(cardNo,branchId);
 			//conn.commit();
 			
 
@@ -81,6 +83,20 @@ public class BorrowerService {
 			return null;
 		}
 
+	}
+	public void checkInBook(Loan loan) {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BorrowerDAO borrowerDao = new BorrowerDAO(conn);
+			borrowerDao.updateLoan(loan);
+			conn.commit();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			
+		}
+		
 	}
 
 }

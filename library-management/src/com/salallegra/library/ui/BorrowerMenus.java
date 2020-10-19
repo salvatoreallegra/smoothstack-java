@@ -120,11 +120,24 @@ public class BorrowerMenus {
 //		LocalDate todaysDate = LocalDate.now();
 //		LocalDate dueDate = todaysDate.plusDays(7);
 //		
-		List<Book> checkedBooks = bs.getCheckedOutBooks(cardNo);
+		System.out.println("Testing " + cardNo + " Testing " + branchChoice);
+		List<Book> checkedBooks = bs.getCheckedOutBooks(cardNo,branchChoice);
+		System.out.println("These are your Checked out Books for branch id " + branchChoice);
 		for (Book b : checkedBooks) {
-			System.out.println(b.getBookId() + b.getTitle());
+			System.out.println(b.getBookId() + ")" +  b.getTitle());
+		}
+		int checkInIndex = checkedBooks.size() + 1;
+		System.out.println(checkInIndex + ")" + "Back to main menu");
+		System.out.println("Enter the book id you'd like to check in");
+		int checkInId = sc.nextInt();
+		sc.nextLine();
+		if(checkInId == checkInIndex) {
+			Borr1();
 		}
 		
+		Loan loan = new Loan(checkInId,branchChoice,null,null,null,LocalDate.now());
+		bs.checkInBook(loan);
+		System.out.println("Your book is now checked in");
 		// System.out.println(checkOutBookId + " " + branchChoice + " " + cardNo + " " +
 		// todaysDate + " " + dueDate);
 		//Loan loan = new Loan(checkOutBookId, branchChoice, cardNo, todaysDate, dueDate, null);
