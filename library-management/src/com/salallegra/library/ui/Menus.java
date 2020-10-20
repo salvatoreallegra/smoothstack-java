@@ -19,6 +19,7 @@ import com.salallegra.library.Entity.Branch;
 public class Menus {
 
 	Scanner sc = new Scanner(System.in);
+	
 
 	public void showBooks() {
 		AdministratorService adminService = new AdministratorService();
@@ -42,6 +43,10 @@ public class Menus {
 		case 1:
 			LibraryMenus libMenu = new LibraryMenus();			
 			libMenu.lib1();;
+			break;
+		case 2:
+			AdminMenus adminMenu = new AdminMenus();
+			adminMenu.adminMain();
 			break;
 		case 3:
 			BorrowerMenus borMenu = new BorrowerMenus();

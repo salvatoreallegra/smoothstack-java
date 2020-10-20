@@ -13,9 +13,9 @@ public class Book {
 	private Integer bookId;
 	private String title;
 	private List<Author> authors;
-//	private List<Genre> genres;
-//	private List<Branch> branches;
-//	private Publisher publisher;
+	private List<Genre> genres;
+	private List<Branch> branches;
+	private Publisher publisher;
 	public Integer getBookId() {
 		return bookId;
 	}

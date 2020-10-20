@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+
 
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Borrower;
@@ -81,8 +81,6 @@ public class BorrowerMenus {
 		sc.nextLine();
 		LocalDate todaysDate = LocalDate.now();
 		LocalDate dueDate = todaysDate.plusDays(7);
-		// System.out.println(checkOutBookId + " " + branchChoice + " " + cardNo + " " +
-		// todaysDate + " " + dueDate);
 		Loan loan = new Loan(checkOutBookId, branchChoice, cardNo, todaysDate, dueDate, null);
 		boolean bookCheckOut = bs.checkOutBook(loan);
 		if (!bookCheckOut) {
@@ -110,45 +108,25 @@ public class BorrowerMenus {
 		if (branchChoice == menuIndex) {
 			Borr1();
 		}
-//		System.out.println("Pick the book you want to check in....");
-//		List<Book> books = bs.getAllBooksForBranch(branchChoice);
-//		for (Book b : books) {
-//			System.out.println(b.getBookId() + " " + b.getTitle());
-//		}
-//		int checkInBookId = sc.nextInt();
-//		sc.nextLine();
-//		LocalDate todaysDate = LocalDate.now();
-//		LocalDate dueDate = todaysDate.plusDays(7);
-//		
+
 		System.out.println("Testing " + cardNo + " Testing " + branchChoice);
-		List<Book> checkedBooks = bs.getCheckedOutBooks(cardNo,branchChoice);
+		List<Book> checkedBooks = bs.getCheckedOutBooks(cardNo, branchChoice);
 		System.out.println("These are your Checked out Books for branch id " + branchChoice);
 		for (Book b : checkedBooks) {
-			System.out.println(b.getBookId() + ")" +  b.getTitle());
+			System.out.println(b.getBookId() + ")" + b.getTitle());
 		}
 		int checkInIndex = checkedBooks.size() + 1;
 		System.out.println(checkInIndex + ")" + "Back to main menu");
 		System.out.println("Enter the book id you'd like to check in");
 		int checkInId = sc.nextInt();
 		sc.nextLine();
-		if(checkInId == checkInIndex) {
+		if (checkInId == checkInIndex) {
 			Borr1();
 		}
-		
-		Loan loan = new Loan(checkInId,branchChoice,null,null,null,LocalDate.now());
+
+		Loan loan = new Loan(checkInId, branchChoice, null, null, null, LocalDate.now());
 		bs.checkInBook(loan);
 		System.out.println("Your book is now checked in");
-		// System.out.println(checkOutBookId + " " + branchChoice + " " + cardNo + " " +
-		// todaysDate + " " + dueDate);
-		//Loan loan = new Loan(checkOutBookId, branchChoice, cardNo, todaysDate, dueDate, null);
-//		boolean bookCheckOut = bs.checkOutBook(loan);
-//		if (!bookCheckOut) {
-//			System.out.println("Book has been successfully checked out...");
-//		} else {
-//			System.out.println("You've already checked out this book at this branch");
-//			Borr1();
-//		}
-//		Borr1();
 
 	}
 
