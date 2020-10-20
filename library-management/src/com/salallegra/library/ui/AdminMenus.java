@@ -1,9 +1,15 @@
 package com.salallegra.library.ui;
 
+import java.util.List;
 import java.util.Scanner;
+
+import com.salallegra.library.Entity.Author;
+import com.salallegra.library.Entity.Book;
+import com.salallegra.library.service.AdministratorService;
 
 public class AdminMenus {
 	Scanner sc = new Scanner(System.in);
+	AdministratorService as = new AdministratorService();
 
 	public void adminMain() {
 		System.out.println("1) Add/update/delete/read book and author");
@@ -43,6 +49,15 @@ public class AdminMenus {
 	}
 
 	public void authorMenu() {
+		List<Book> books = as.getBooks(null);
+		for (Book b : books) {
+			System.out.println("Book Title: " + b.getTitle());
+			for(Author a: b.getAuthors()) {
+				System.out.println("Author Name: " + a.getAuthorName()); 
+				System.out.println();
+			}
+			
+		}		
 
 	}
 

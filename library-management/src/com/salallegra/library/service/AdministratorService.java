@@ -58,5 +58,21 @@ public class AdministratorService {
 			return null;
 		}
 	}
+	/*This is for the top level menu of admin
+	 * to display all books and their associated authors
+	 */
+//	public List<Book> getAllBooksAuthors(String searchString) {
+//		try(Connection conn = conUtil.getConnection()) {
+//			BookDAO bdao = new BookDAO(conn);
+//			if (searchString != null) {
+//				return bdao.readAllBooksByName(searchString);
+//			} else {
+//				return bdao.readAllBooks();
+//			}
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
 }
