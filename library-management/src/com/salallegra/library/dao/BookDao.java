@@ -23,7 +23,7 @@ public class BookDAO extends BaseDAO<Book>{
 	}
 
 	public void addBook(Book book) throws ClassNotFoundException, SQLException {
-		save("INSERT INTO tbl_book (title) VALUES (?)", new Object[] { book.getTitle() });
+		save("INSERT INTO tbl_book (title,pubId) VALUES (?,?)", new Object[] { book.getTitle(),book.getPublisherId() });
 	}
 	
 	public Integer addBookWithPk(Book book) throws ClassNotFoundException, SQLException {

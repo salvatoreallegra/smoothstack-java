@@ -16,11 +16,23 @@ public class Book {
 	private List<Genre> genres;
 	private List<Branch> branches;
 	private Publisher publisher;
+	int publisherId;
 	public Integer getBookId() {
 		return bookId;
 	}
 	public Book() {
 		
+	}
+	
+	public int getPublisherId() {
+		return publisherId;
+	}
+	public void setPublisherId(int publisherId) {
+		this.publisherId = publisherId;
+	}
+	public Book(String title, int publisherId) {
+		this.title = title;
+		this.publisherId = publisherId;
 	}
 	public Book(Integer bookId, String title) {
 		super();
