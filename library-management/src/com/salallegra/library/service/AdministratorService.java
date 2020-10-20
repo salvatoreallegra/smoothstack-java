@@ -89,6 +89,28 @@ public class AdministratorService {
 			}
 		}
 	}
+	
+	public void updateBook(Book book) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BookDAO bdao = new BookDAO(conn);
+			
+			bdao.updateBook(book);		
+			conn.commit();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				conn.rollback();
+			}
+			
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
 
 	public List<Book> getBooks(String searchString) {
 		try (Connection conn = conUtil.getConnection()) {

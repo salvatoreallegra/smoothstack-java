@@ -131,7 +131,33 @@ public class AdminMenus {
 	}
 
 	public void updateBook() {
-
+		List<Book> books = as.getBooks(null);
+		for (Book b : books) {
+			System.out.println("Books: " + b.getBookId() + ") " + b.getTitle());
+		}
+		System.out.println("Select book id to Update");
+		int bookId = sc.nextInt(); 
+		sc.nextLine();
+		
+		System.out.println("Enter New Book Name to Update");
+		String bookName = sc.nextLine(); 
+		
+//		System.out.println("Select PublisherID to Update");
+//		int pubId = sc.nextInt(); 
+//		sc.nextLine();
+		
+		
+		Book book = new Book(bookId,bookName);
+		
+		try {
+			as.updateBook(book);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		authorMenu();
+		
+		
 	}
 
 	public void deleteBook() {
@@ -151,6 +177,7 @@ public class AdminMenus {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		authorMenu();
 		
 
 	}
