@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-
 import com.salallegra.library.Entity.Author;
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Publisher;
@@ -13,7 +12,6 @@ import com.salallegra.library.service.AdministratorService;
 public class AdminMenus {
 	Scanner sc = new Scanner(System.in);
 	AdministratorService as = new AdministratorService();
-	
 
 	public void adminMain() {
 		System.out.println("1) Add/update/delete/read book and author");
@@ -57,7 +55,7 @@ public class AdminMenus {
 		for (Book b : books) {
 			System.out.println("Book Title: " + b.getBookId() + ") " + b.getTitle());
 			for (Author a : b.getAuthors()) {
-				System.out.println("Author Name: " + a.getAuthorName() + " Author ID: " + a.getAuthorId() );
+				System.out.println("Author Name: " + a.getAuthorName() + " Author ID: " + a.getAuthorId());
 				System.out.println();
 			}
 		}
@@ -111,14 +109,10 @@ public class AdminMenus {
 		List<Publisher> publishers = as.getAllPublishers();
 		for (Publisher p : publishers) {
 			System.out.println("Publishers: " + p.getPublisherId() + ") " + p.getPublisherName());
-//			for (Author a : b.getAuthors()) {
-//				System.out.println("Author Name: " + a.getAuthorName() + " Author ID: " + a.getAuthorId() );
-//				System.out.println();
-//			}
 		}
 		String inPublisherList = sc.nextLine();
 		int publisherNumber = 0;
-		if(inPublisherList.equalsIgnoreCase("Y")) {
+		if (inPublisherList.equalsIgnoreCase("Y")) {
 			System.out.println("Enter publisher number");
 			publisherNumber = sc.nextInt();
 			sc.nextLine();
@@ -127,12 +121,12 @@ public class AdminMenus {
 		newBook.setPublisherId(publisherNumber);
 		try {
 			as.addBookSimple(newBook);
+			System.out.println("Book Added!");
+			adminMain();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 
 	}
 
@@ -141,6 +135,23 @@ public class AdminMenus {
 	}
 
 	public void deleteBook() {
+		
+		List<Book> books = as.getBooks(null);
+		for (Book b : books) {
+			System.out.println("Books: " + b.getBookId() + ") " + b.getTitle());
+		}
+		System.out.println("Select book id to delete");
+		int bookId = sc.nextInt(); 
+		sc.nextLine();
+		Book book = new Book();
+		book.setBookId(bookId);
+		try {
+			as.deleteBook(book);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	}
 }

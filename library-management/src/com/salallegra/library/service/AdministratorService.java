@@ -45,7 +45,7 @@ public class AdministratorService {
 		}
 	}
 
-	public String addBookSimple(Book book) throws SQLException {
+	public void addBookSimple(Book book) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
@@ -54,13 +54,35 @@ public class AdministratorService {
 			bdao.addBook(book);
 		
 			conn.commit();
-			return "Book added sucessfully";
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			if (conn != null) {
 				conn.rollback();
 			}
-			return "Unable to add book - contact admin.";
+			
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
+
+	public void deleteBook(Book book) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			BookDAO bdao = new BookDAO(conn);
+			
+			bdao.deleteBook(book);		
+			conn.commit();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				conn.rollback();
+			}
+			
 		} finally {
 			if (conn != null) {
 				conn.close();
