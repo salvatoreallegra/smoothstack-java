@@ -22,7 +22,9 @@ public class GenreDAO extends BaseDAO<Genre>{
 	public GenreDAO(Connection conn) {
 		super(conn);
 	}
-	
+	public List<Genre> readAllGenres() throws SQLException, ClassNotFoundException {
+		return read("SELECT * FROM tbl_genre", null);
+	}
 	@Override
 	public List<Genre> extractData(ResultSet rs) throws SQLException, ClassNotFoundException {
 		List<Genre> genres = new ArrayList<>();

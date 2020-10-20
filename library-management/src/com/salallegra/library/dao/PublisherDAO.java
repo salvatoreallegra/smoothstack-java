@@ -25,6 +25,9 @@ public class PublisherDAO extends BaseDAO<Publisher> {
 	public List<Publisher> readAllPublishers() throws SQLException, ClassNotFoundException {
 		return read("SELECT * FROM tbl_publisher", null);
 	}
+	public void addPublisher(Publisher publisher) throws ClassNotFoundException, SQLException {
+		save("INSERT INTO tbl_publisher (publisherName) VALUES (?)", new Object[] { publisher.getPublisherName() });
+	}
 
 	@Override
 	public List<Publisher> extractData(ResultSet rs) throws SQLException {

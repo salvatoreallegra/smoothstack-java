@@ -13,6 +13,9 @@ public class Publisher {
 		this.publisherAddress = publisherAddress;
 		this.publisherPhone = publisherPhone;
 	}
+	public Publisher(String pubName) {
+		this.publisherName = pubName;
+	}
 	public Integer getPublisherId() {
 		return publisherId;
 	}

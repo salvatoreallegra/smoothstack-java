@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.salallegra.library.dao.AuthorDAO;
 import com.salallegra.library.dao.BookDAO;
+import com.salallegra.library.dao.GenreDAO;
 import com.salallegra.library.dao.PublisherDAO;
 import com.salallegra.library.Entity.Author;
 import com.salallegra.library.Entity.Book;
@@ -21,6 +22,7 @@ public class AdministratorService {
 			conn = conUtil.getConnection();
 			BookDAO bdao = new BookDAO(conn);
 			AuthorDAO adao = new AuthorDAO(conn);
+			GenreDAO gdao = new GenreDAO(conn);
 			if (book.getTitle() != null && book.getTitle().length() > 45) {
 				return "Book Title cannot be empty and should be 45 char in length";
 			}
@@ -111,6 +113,28 @@ public class AdministratorService {
 			}
 		}
 	}
+	
+	public void addPublisher(Publisher publisher) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			PublisherDAO pdao = new PublisherDAO(conn);
+			
+			pdao.addPublisher(publisher);		
+			conn.commit();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				conn.rollback();
+			}
+			
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
 
 	public List<Book> getBooks(String searchString) {
 		try (Connection conn = conUtil.getConnection()) {
@@ -125,6 +149,7 @@ public class AdministratorService {
 			return null;
 		}
 	}
+	
 
 	public List<Publisher> getAllPublishers() {
 		try (Connection conn = conUtil.getConnection()) {

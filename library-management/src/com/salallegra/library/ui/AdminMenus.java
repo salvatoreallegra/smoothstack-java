@@ -89,8 +89,34 @@ public class AdminMenus {
 	}
 
 	public void publisherMenu() {
+		System.out.println("Enter your publisher operation...");
+		System.out.println("1) Add a Publisher");
+		System.out.println("2) Update a publisher");
+		System.out.println("3) Deleta a publisher");
+		
+		int choice = sc.nextInt();
+		sc.nextLine();
+		switch (choice) {
+		case 1:
+			addPublisher();
+			break; // optional
 
+		case 2:
+			updateBook();
+			break; // optional
+
+		case 3:
+			deleteBook();
+			break; // optional
+
+		default:
+			System.out.println("Invalid entry, please enter 1,2 or 3");
+			publisherMenu();
+		}
+		
 	}
+
+	
 
 	public void branchMenu() {
 
@@ -112,11 +138,56 @@ public class AdminMenus {
 		}
 		String inPublisherList = sc.nextLine();
 		int publisherNumber = 0;
+		String publisherName = null;
 		if (inPublisherList.equalsIgnoreCase("Y")) {
 			System.out.println("Enter publisher number");
 			publisherNumber = sc.nextInt();
 			sc.nextLine();
 		}
+		else {
+			System.out.println("We need to create a publisher for the book you are adding...");
+			System.out.println("Enter publisher Name");
+			publisherName = sc.nextLine();
+			Publisher publisher = new Publisher(publisherName);
+			try {
+				as.addPublisher(publisher);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Publisher Added");
+		}
+		
+		//Display List of Authors to add to table book Authors
+		System.out.println("Is your auther in the list?...Y or N");
+//		List<Author> authors = as.getAllPublishers();
+//		for (Publisher p : publishers) {
+//			System.out.println("Publishers: " + p.getPublisherId() + ") " + p.getPublisherName());
+//		}
+//		String inPublisherList = sc.nextLine();
+//		int publisherNumber = 0;
+//		String publisherName = null;
+//		if (inPublisherList.equalsIgnoreCase("Y")) {
+//			System.out.println("Enter publisher number");
+//			publisherNumber = sc.nextInt();
+//			sc.nextLine();
+//		}
+//		else {
+//			System.out.println("We need to create a publisher for the book you are adding...");
+//			System.out.println("Enter publisher Name");
+//			publisherName = sc.nextLine();
+//			Publisher publisher = new Publisher(publisherName);
+//			try {
+//				as.addPublisher(publisher);
+//			
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			System.out.println("Author Added");
+//		}
+		
 		newBook.setTitle(bookName);
 		newBook.setPublisherId(publisherNumber);
 		try {
@@ -179,6 +250,9 @@ public class AdminMenus {
 		}
 		authorMenu();
 		
-
+	}
+	
+	public void addPublisher() {
+		
 	}
 }
