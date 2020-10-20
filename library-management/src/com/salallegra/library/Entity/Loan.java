@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class Loan {
 
+	//You need to add Book book, Branch branch as properties, instead of just the primary
+	//keys
 	Integer bookId;
 	Integer branchId;
 	Integer cardNo;

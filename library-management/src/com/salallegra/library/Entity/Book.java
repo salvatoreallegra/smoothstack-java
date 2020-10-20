@@ -6,7 +6,7 @@ package com.salallegra.library.Entity;
 import java.util.List;
 
 /**
- * @author ppradhan
+ * @author salvatore allegra
  *
  */
 public class Book {
