@@ -51,14 +51,35 @@ public class AdminMenus {
 	public void authorMenu() {
 		List<Book> books = as.getBooks(null);
 		for (Book b : books) {
-			System.out.println("Book Title: " + b.getTitle());
-			for(Author a: b.getAuthors()) {
-				System.out.println("Author Name: " + a.getAuthorName()); 
+			System.out.println("Book Title: " + b.getBookId() + ") " + b.getTitle());
+			for (Author a : b.getAuthors()) {
+				System.out.println("Author Name: " + a.getAuthorName() + " Author ID: " + a.getAuthorId() );
 				System.out.println();
 			}
-			
-		}		
+		}
+		System.out.println("1) Add a book");
+		System.out.println("2) Update a book");
+		System.out.println("3) Deleta a book");
+		System.out.println("Enter 1, 2 or 3");
+		int choice = sc.nextInt();
+		sc.nextLine();
+		switch (choice) {
+		case 1:
+			addBook();
+			break; // optional
 
+		case 2:
+			updateBook();
+			break; // optional
+
+		case 3:
+			deleteBook();
+			break; // optional
+
+		default:
+			System.out.println("Invalid entry, please enter 1,2 or 3");
+			authorMenu();
+		}
 	}
 
 	public void genreMenu() {
@@ -77,4 +98,19 @@ public class AdminMenus {
 
 	}
 
+	public void addBook() {
+		System.out.println("Add Book");
+		System.out.println("Enter Book Name: ");
+		Book newBook = new Book();
+		String bookName = sc.next();
+
+	}
+
+	public void updateBook() {
+
+	}
+
+	public void deleteBook() {
+
+	}
 }

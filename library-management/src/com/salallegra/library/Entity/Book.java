@@ -19,6 +19,9 @@ public class Book {
 	public Integer getBookId() {
 		return bookId;
 	}
+	public Book() {
+		
+	}
 	public Book(Integer bookId, String title) {
 		super();
 		this.bookId = bookId;
