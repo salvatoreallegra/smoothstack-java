@@ -79,6 +79,7 @@ public class BorrowerMenus {
 		}
 		int checkOutBookId = sc.nextInt();
 		sc.nextLine();
+		//Move into the service
 		LocalDate todaysDate = LocalDate.now();
 		LocalDate dueDate = todaysDate.plusDays(7);
 		Loan loan = new Loan(checkOutBookId, branchChoice, cardNo, todaysDate, dueDate, null);

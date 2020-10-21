@@ -57,6 +57,8 @@ public class BorrowerService {
 			//return ldao.addLoan(loan);
 			ldao.addLoan(loan);
 			conn.commit();
+			//close connection here
+			conn.close();
 			return false;
 
 		} catch (ClassNotFoundException | SQLException e) {
