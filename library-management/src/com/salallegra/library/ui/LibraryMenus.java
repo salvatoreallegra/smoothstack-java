@@ -10,20 +10,13 @@ import com.salallegra.library.service.AdministratorService;
 import com.salallegra.library.service.LibrarianService;
 
 public class LibraryMenus {
-	
+
 	Scanner sc = new Scanner(System.in);
 
-	public void showBooks() {
-		AdministratorService adminService = new AdministratorService();
-		List<Book> books = adminService.getBooks(null);
-		for (Book b : books) {
-			System.out.println("Book Title: " + b.getTitle());
-		}
-	}
-
 	Menus mainMenu = new Menus();
+	LibrarianService libService = new LibrarianService();
 
-	// This is the top level menu of
+	// This is the top level menu of Librarian Functions
 	public void lib1() {
 
 		System.out.println("1) Enter the branch number you manage ");
@@ -47,23 +40,23 @@ public class LibraryMenus {
 	}
 
 	public void lib2() {
-		LibrarianService service = new LibrarianService();
+		// LibrarianService service = new LibrarianService();
 		System.out.println("Displaying Branches....");
 		System.out.println();
-		List<Branch> branches = service.getAllBranches();
+		List<Branch> branches = libService.getAllBranches();
+
 		for (Branch b : branches) {
 			System.out.println("Branches: " + b.getBranchID() + " " + b.getBranchName());
 		}
-		
-		int quitIndex = branches.size() + 1;
 
+		int quitIndex = branches.size() + 1;
 		System.out.println(quitIndex + ") Quit to previous...");
-		
+
 		int selection = sc.nextInt();
 		sc.nextLine();
-		
+
 		int branchSelection = selection - 1;
-		
+
 		System.out.println("selection " + selection);
 		if (selection == quitIndex) {
 			lib1();
@@ -76,7 +69,7 @@ public class LibraryMenus {
 	}
 
 	public void lib3(int branchID, String branchName) {
-		LibrarianService libService = new LibrarianService();
+		// LibrarianService libService = new LibrarianService();
 		System.out.println("Currently selected library branch is " + branchName);
 		System.out.println("1) Update branch details ");
 		System.out.println("2) Add Copies of a book to the branch");
@@ -93,6 +86,7 @@ public class LibraryMenus {
 
 		switch (selection) {
 		case 1:
+
 			System.out.println("You've chosen to update branch " + branchName + " With ID " + displayBranchId);
 
 			System.out.println("Please Enter a new branch name or N/A for no change");
@@ -121,12 +115,25 @@ public class LibraryMenus {
 			for (Copies c : copies) {
 				System.out.println("Number of Copies... " + c.getNoCopies());
 			}
+			
 			System.out.println("Enter a new number of copies to update...");
+			
 			int copiesTotal = sc.nextInt();
 			sc.nextLine();
+			
 			Copies copy = new Copies(bookId, copiesTotal);
-			libService.updateCopy(copy);
-			System.out.println("Number of copies updated!");
+			Branch copyBranch = new Branch(displayBranchId);
+
+			if (libService.updateCopy(copy, copyBranch)) {
+				System.out.println("Number of copies updated!");
+				List<Copies> updatedCopies = libService.getBookCopies(bookId);
+				for (Copies c : updatedCopies) {
+					System.out.println("Number of Copies... " + c.getNoCopies());
+					System.out.println();
+				}
+			} else {
+				System.out.println("Error updating copies");
+			}
 			lib3(branchID, branchName);
 
 			break; // optional
