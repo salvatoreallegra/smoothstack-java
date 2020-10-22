@@ -20,7 +20,7 @@ public class BorrowerService {
 	public ConnectionUtil conUtil = new ConnectionUtil();
 
 	// Get cards so we can validate if the card number entered is valid
-	public List<Borrower> getAllCards() {
+	public List<Borrower> getAllCards() throws SQLException{
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
@@ -31,15 +31,19 @@ public class BorrowerService {
 			e.printStackTrace();
 			return null;
 		}
+		finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
 
 	}
 
-	public List<Book> getAllBooksForBranch(int branchId) {
+	public List<Book> getAllBooksForBranch(int branchId) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
 			BookDAO bookDAO = new BookDAO(conn);
-			//conn.close();
 			return bookDAO.getAllBooksForBranch(branchId);
 			
 
@@ -47,8 +51,13 @@ public class BorrowerService {
 
 			return null;
 		}
+		finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
 	}
-	public List<Copies> getNumberOfCopies(int branchId, int bookId) {
+	public List<Copies> getNumberOfCopies(int branchId, int bookId) throws SQLException{
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
@@ -61,14 +70,18 @@ public class BorrowerService {
 
 			return null;
 		}
-		
+		finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
 	}
 
 	/*
 	 * checkOutBook will insert a new row into tbl_book_loans this is part of the
 	 * borrower module called from the Borrower Menu
 	 */
-	public boolean checkOutBook(Loan loan) {
+	public boolean checkOutBook(Loan loan) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
@@ -85,10 +98,15 @@ public class BorrowerService {
 
 			return true;
 		}
+		finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
 
 	}
 
-	public List<Book> getCheckedOutBooks(int cardNo, int branchId) {
+	public List<Book> getCheckedOutBooks(int cardNo, int branchId) throws SQLException{
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
@@ -102,10 +120,15 @@ public class BorrowerService {
 			System.out.println("Error, re-start the system");
 			return null;
 		}
+		finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
 
 	}
 
-	public void checkInBook(Loan loan) {
+	public void checkInBook(Loan loan) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
@@ -116,6 +139,11 @@ public class BorrowerService {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 
+		}
+		finally {
+			if (conn != null) {
+				conn.close();
+			}
 		}
 
 	}
