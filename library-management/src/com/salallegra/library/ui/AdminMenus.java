@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.salallegra.library.Entity.Author;
 import com.salallegra.library.Entity.Book;
+import com.salallegra.library.Entity.Genre;
 import com.salallegra.library.Entity.Publisher;
 import com.salallegra.library.service.AdministratorService;
 
@@ -56,6 +57,13 @@ public class AdminMenus {
 			System.out.println("Book Title: " + b.getBookId() + ") " + b.getTitle());
 			for (Author a : b.getAuthors()) {
 				System.out.println("Author Name: " + a.getAuthorName() + " Author ID: " + a.getAuthorId());
+
+			}
+			for (Genre g : b.getGenres()) {
+				System.out.println("Genre Name: " + g.getGenreName() + " Genre ID: " + g.getGenreId());
+			}
+			for (Publisher p: b.getPublishers()) {
+				System.out.println("Publisher Name: " + p.getPublisherName() + " Publisher ID: " + p.getPublisherId());
 				System.out.println();
 			}
 		}
@@ -93,7 +101,7 @@ public class AdminMenus {
 		System.out.println("1) Add a Publisher");
 		System.out.println("2) Update a publisher");
 		System.out.println("3) Deleta a publisher");
-		
+
 		int choice = sc.nextInt();
 		sc.nextLine();
 		switch (choice) {
@@ -113,10 +121,8 @@ public class AdminMenus {
 			System.out.println("Invalid entry, please enter 1,2 or 3");
 			publisherMenu();
 		}
-		
-	}
 
-	
+	}
 
 	public void branchMenu() {
 
@@ -143,51 +149,24 @@ public class AdminMenus {
 			System.out.println("Enter publisher number");
 			publisherNumber = sc.nextInt();
 			sc.nextLine();
-		}
-		else {
+		} else {
 			System.out.println("We need to create a publisher for the book you are adding...");
 			System.out.println("Enter publisher Name");
 			publisherName = sc.nextLine();
 			Publisher publisher = new Publisher(publisherName);
 			try {
 				as.addPublisher(publisher);
-			
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println("Publisher Added");
 		}
-		
-		//Display List of Authors to add to table book Authors
+
+		// Display List of Authors to add to table book Authors
 		System.out.println("Is your auther in the list?...Y or N");
-//		List<Author> authors = as.getAllPublishers();
-//		for (Publisher p : publishers) {
-//			System.out.println("Publishers: " + p.getPublisherId() + ") " + p.getPublisherName());
-//		}
-//		String inPublisherList = sc.nextLine();
-//		int publisherNumber = 0;
-//		String publisherName = null;
-//		if (inPublisherList.equalsIgnoreCase("Y")) {
-//			System.out.println("Enter publisher number");
-//			publisherNumber = sc.nextInt();
-//			sc.nextLine();
-//		}
-//		else {
-//			System.out.println("We need to create a publisher for the book you are adding...");
-//			System.out.println("Enter publisher Name");
-//			publisherName = sc.nextLine();
-//			Publisher publisher = new Publisher(publisherName);
-//			try {
-//				as.addPublisher(publisher);
-//			
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			System.out.println("Author Added");
-//		}
-		
+
 		newBook.setTitle(bookName);
 		newBook.setPublisherId(publisherNumber);
 		try {
@@ -207,19 +186,18 @@ public class AdminMenus {
 			System.out.println("Books: " + b.getBookId() + ") " + b.getTitle());
 		}
 		System.out.println("Select book id to Update");
-		int bookId = sc.nextInt(); 
+		int bookId = sc.nextInt();
 		sc.nextLine();
-		
+
 		System.out.println("Enter New Book Name to Update");
-		String bookName = sc.nextLine(); 
-		
+		String bookName = sc.nextLine();
+
 //		System.out.println("Select PublisherID to Update");
 //		int pubId = sc.nextInt(); 
 //		sc.nextLine();
-		
-		
-		Book book = new Book(bookId,bookName);
-		
+
+		Book book = new Book(bookId, bookName);
+
 		try {
 			as.updateBook(book);
 		} catch (SQLException e) {
@@ -227,18 +205,17 @@ public class AdminMenus {
 			e.printStackTrace();
 		}
 		authorMenu();
-		
-		
+
 	}
 
 	public void deleteBook() {
-		
+
 		List<Book> books = as.getBooks(null);
 		for (Book b : books) {
 			System.out.println("Books: " + b.getBookId() + ") " + b.getTitle());
 		}
 		System.out.println("Select book id to delete");
-		int bookId = sc.nextInt(); 
+		int bookId = sc.nextInt();
 		sc.nextLine();
 		Book book = new Book();
 		book.setBookId(bookId);
@@ -249,10 +226,10 @@ public class AdminMenus {
 			e.printStackTrace();
 		}
 		authorMenu();
-		
+
 	}
-	
+
 	public void addPublisher() {
-		
+
 	}
 }

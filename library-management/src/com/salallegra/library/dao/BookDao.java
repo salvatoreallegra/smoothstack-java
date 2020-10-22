@@ -71,10 +71,14 @@ public class BookDAO extends BaseDAO<Book>{
 	public List<Book> extractData(ResultSet rs) throws SQLException, ClassNotFoundException {
 		List<Book> books = new ArrayList<>();
 		AuthorDAO adao = new AuthorDAO(conn);
+		GenreDAO gdao = new GenreDAO(conn);
+		PublisherDAO pdao = new PublisherDAO(conn);
 		while (rs.next()) {
 			Book b = new Book(rs.getInt("bookId"), rs.getString("title"));
 			b.setAuthors(adao.read("select * from tbl_author where authorId IN (select authorId from tbl_book_authors where bookId = ?)", new Object[] {b.getBookId()}));
-			//b.setGenres()
+			b.setGenres(gdao.read("select * from tbl_genre where genre_id IN (select genre_id from tbl_book_genres where bookId = ?)", new Object[] {b.getBookId()}));
+			b.setPublishers(pdao.read("select * from tbl_publisher where publisherId IN (select pubId from tbl_book where bookId = ?)", new Object[] {b.getBookId()}));
+			
 			books.add(b);
 		}
 		return books;
