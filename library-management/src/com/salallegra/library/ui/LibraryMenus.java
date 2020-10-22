@@ -20,7 +20,8 @@ public class LibraryMenus {
 	public void lib1() {
 
 		System.out.println("1) Enter the branch number you manage ");
-		System.out.println("2) Quit to return to main menu ");
+		System.out.println("2) Quick Statistics");
+		System.out.println("3) Quit to return to main menu ");
 		int selection = sc.nextInt();
 		sc.nextLine();
 
@@ -30,6 +31,9 @@ public class LibraryMenus {
 			break; // optional
 
 		case 2:
+			quickStatistics();
+			break; // optional
+		case 3:
 			mainMenu.displayMainMenu();
 			break; // optional
 
@@ -115,12 +119,12 @@ public class LibraryMenus {
 			for (Copies c : copies) {
 				System.out.println("Number of Copies... " + c.getNoCopies());
 			}
-			
+
 			System.out.println("Enter a new number of copies to update...");
-			
+
 			int copiesTotal = sc.nextInt();
 			sc.nextLine();
-			
+
 			Copies copy = new Copies(bookId, copiesTotal);
 			Branch copyBranch = new Branch(displayBranchId);
 
@@ -144,6 +148,31 @@ public class LibraryMenus {
 		default:
 			System.out.println("Invalid entry, please enter 1,2 or 3");
 			lib3(branchID, branchName);
+		}
+
+	}
+
+	public void quickStatistics() {
+		
+		System.out.println("What quick statistic would you like to inquire about? ");
+		System.out.println("1) Book with greatest amount of copies?");
+		System.out.println("2) Back to Librarian Main Menu");
+		
+		int selection = sc.nextInt();
+		sc.nextLine();
+
+		switch (selection) {
+		case 1:
+			System.out.println("The largest number of copies is " + libService.largestNumberOfCopies());
+			break; // optional
+
+		case 2:
+			lib1();
+			break; // optional
+		
+		default:
+			System.out.println("Invalid entry, please enter 1 or 2");
+			lib1();
 		}
 
 	}

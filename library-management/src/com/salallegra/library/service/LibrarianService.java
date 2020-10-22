@@ -2,6 +2,7 @@ package com.salallegra.library.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.salallegra.library.Entity.Author;
@@ -62,6 +63,7 @@ public class LibrarianService {
 		}
 
 	}
+
 	public List<Book> getAllBooks() {
 		Connection conn = null;
 		try {
@@ -75,7 +77,7 @@ public class LibrarianService {
 		}
 
 	}
-	
+
 	public List<Copies> getBookCopies(int bookId) {
 		Connection conn = null;
 		try {
@@ -87,9 +89,9 @@ public class LibrarianService {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
+
 	public void updateBranch(Branch branch) {
 		Connection conn = null;
 		try {
@@ -100,26 +102,44 @@ public class LibrarianService {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
-	
+
 	public boolean updateCopy(Copies copy, Branch branch) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
 			CopiesDAO copiesDAO = new CopiesDAO(conn);
-			copiesDAO.updateCopies(copy,branch);
+			copiesDAO.updateCopies(copy, branch);
 			conn.commit();
 			return true;
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			return false;
-			
+
 		}
-		
+	}
+
+	// place holder, will get to this later, need to refactor copy pojo to have
+	// objects instead of db fields
+	public int largestNumberOfCopies() {
+		List<Integer> numCopies = new ArrayList<>();
+		numCopies.add(1);
+		numCopies.add(21);
+		numCopies.add(55);
+		numCopies.add(18);
+
+		int largest = numCopies.get(0);
+		for (int i = 1; i < numCopies.size(); i++) {
+			if (numCopies.get(i) > largest) {
+				largest = numCopies.get(i);
+			}
+		}
+
+		return largest;
 	}
 
 }

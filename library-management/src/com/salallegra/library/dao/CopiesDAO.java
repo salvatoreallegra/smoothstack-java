@@ -55,6 +55,11 @@ public class CopiesDAO extends BaseDAO<Copies>{
 		searchString = "%"+searchString+"%";
 		return read("SELECT * FROM tbl_book WHERE title LIKE ?", new Object[] {searchString});
 	}
+	
+//	public List<Copies> readAllBooksByName(String searchString) throws SQLException, ClassNotFoundException {
+//		searchString = "%"+searchString+"%";
+//		return read("SELECT * FROM tbl_book WHERE title LIKE ?", new Object[] {searchString});
+//	}
 
 	@Override
 	public List<Copies> extractData(ResultSet rs) throws SQLException, ClassNotFoundException {
