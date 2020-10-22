@@ -7,10 +7,12 @@ import java.util.List;
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Borrower;
 import com.salallegra.library.Entity.Branch;
+import com.salallegra.library.Entity.Copies;
 import com.salallegra.library.Entity.Loan;
 import com.salallegra.library.dao.BookDAO;
 import com.salallegra.library.dao.BorrowerDAO;
 import com.salallegra.library.dao.BranchDAO;
+import com.salallegra.library.dao.CopiesDAO;
 import com.salallegra.library.dao.LoansDAO;
 
 public class BorrowerService {
@@ -37,55 +39,72 @@ public class BorrowerService {
 		try {
 			conn = conUtil.getConnection();
 			BookDAO bookDAO = new BookDAO(conn);
+			//conn.close();
 			return bookDAO.getAllBooksForBranch(branchId);
+			
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			return null;
 		}
-
 	}
+	public List<Copies> getNumberOfCopies(int branchId, int bookId) {
+		Connection conn = null;
+		try {
+			conn = conUtil.getConnection();
+			CopiesDAO copiesDAO = new CopiesDAO(conn);
+			//conn.close();
+			return copiesDAO.getBookCopy(bookId, branchId);
+			
+
+		} catch (ClassNotFoundException | SQLException e) {
+
+			return null;
+		}
+		
+	}
+
 	/*
-	 * checkOutBook will insert a new row into tbl_book_loans
-	 * this is part of the borrower module called from the Borrower Menu
+	 * checkOutBook will insert a new row into tbl_book_loans this is part of the
+	 * borrower module called from the Borrower Menu
 	 */
 	public boolean checkOutBook(Loan loan) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
 			LoansDAO ldao = new LoansDAO(conn);
-			//return ldao.addLoan(loan);
 			ldao.addLoan(loan);
 			conn.commit();
-			//close connection here
+			// close connection here
 			conn.close();
 			return false;
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			System.out.println("This book is already checked out");
-			//return null;
+
 			return true;
 		}
 
 	}
+
 	public List<Book> getCheckedOutBooks(int cardNo, int branchId) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
 			BookDAO bdao = new BookDAO(conn);
-			//return ldao.addLoan(loan);
-			return bdao.getCheckedOutBooks(cardNo,branchId);
-			//conn.commit();
-			
+			// return ldao.addLoan(loan);
+			return bdao.getCheckedOutBooks(cardNo, branchId);
+			// conn.commit();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			
+
 			System.out.println("Error, re-start the system");
 			return null;
 		}
 
 	}
+
 	public void checkInBook(Loan loan) {
 		Connection conn = null;
 		try {
@@ -96,9 +115,9 @@ public class BorrowerService {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
 
 }

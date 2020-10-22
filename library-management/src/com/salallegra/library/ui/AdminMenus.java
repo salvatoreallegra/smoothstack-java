@@ -15,6 +15,7 @@ public class AdminMenus {
 	AdministratorService as = new AdministratorService();
 
 	public void adminMain() {
+		
 		System.out.println("1) Add/update/delete/read book and author");
 		System.out.println("2) Add/update/delete/read genres");
 		System.out.println("3) Add/update/delete/read publishers");
@@ -62,7 +63,7 @@ public class AdminMenus {
 			for (Genre g : b.getGenres()) {
 				System.out.println("Genre Name: " + g.getGenreName() + " Genre ID: " + g.getGenreId());
 			}
-			for (Publisher p: b.getPublishers()) {
+			for (Publisher p : b.getPublishers()) {
 				System.out.println("Publisher Name: " + p.getPublisherName() + " Publisher ID: " + p.getPublisherId());
 				System.out.println();
 			}

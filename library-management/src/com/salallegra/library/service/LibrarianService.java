@@ -76,12 +76,12 @@ public class LibrarianService {
 
 	}
 	
-	public List<Copies> getBookCopies(int id) {
+	public List<Copies> getBookCopies(int bookId) {
 		Connection conn = null;
 		try {
 			conn = conUtil.getConnection();
 			CopiesDAO copiesDAO = new CopiesDAO(conn);
-			return copiesDAO.getBookCopy(id);
+			return copiesDAO.getBookCopy(bookId);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

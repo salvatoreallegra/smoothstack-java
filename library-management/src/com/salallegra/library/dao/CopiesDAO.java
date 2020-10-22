@@ -35,10 +35,15 @@ public class CopiesDAO extends BaseDAO<Copies>{
 	public List<Copies> readAllBooks() throws SQLException, ClassNotFoundException {
 		return read("SELECT * FROM tbl_book", null);
 	}
+	public List<Copies> getBookCopy(int bookId, int branchId) throws SQLException, ClassNotFoundException{
+		return read("SELECT bookId,branchId,noOfCopies "
+				+ "FROM tbl_book_copies "
+				+ "WHERE bookId = " + bookId + " and branchId = " +  branchId,null);
+	}
 	public List<Copies> getBookCopy(int bookId) throws SQLException, ClassNotFoundException{
 		return read("SELECT bookId,branchId,noOfCopies "
 				+ "FROM tbl_book_copies "
-				+ "WHERE bookId = " + bookId,null);
+				+ "WHERE bookId = " + bookId ,null);
 	}
 	
 	public void updateCopies(Copies copies, Branch branch) throws ClassNotFoundException, SQLException {

@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-
-
 import com.salallegra.library.Entity.Book;
 import com.salallegra.library.Entity.Borrower;
 import com.salallegra.library.Entity.Branch;
+import com.salallegra.library.Entity.Copies;
 import com.salallegra.library.Entity.Loan;
 import com.salallegra.library.service.BorrowerService;
 import com.salallegra.library.service.LibrarianService;
@@ -43,7 +42,7 @@ public class BorrowerMenus {
 		sc.nextLine();
 		switch (choice) {
 		case 1:
-			pickBranch(cardNo);
+			checkOutBook(cardNo);
 			break; // optional
 
 		case 2:
@@ -59,7 +58,7 @@ public class BorrowerMenus {
 		}
 	}
 
-	public void pickBranch(int cardNo) {
+	public void checkOutBook(int cardNo) {
 		System.out.println("Pick the branch you want to check out from");
 		LibrarianService libService = new LibrarianService();
 		List<Branch> branches = libService.getAllBranches();
@@ -74,18 +73,27 @@ public class BorrowerMenus {
 		}
 		System.out.println("Pick the book you want to check out....");
 		List<Book> books = bs.getAllBooksForBranch(branchChoice);
+
 		for (Book b : books) {
 			System.out.println(b.getBookId() + " " + b.getTitle());
+
 		}
+
 		int checkOutBookId = sc.nextInt();
 		sc.nextLine();
-		//Move into the service
+		System.out.println("stack trace " + branchChoice + " " + checkOutBookId);
+		List<Copies> copies = bs.getNumberOfCopies(branchChoice, checkOutBookId);
+		for (Copies c : copies) {
+			System.out.println("This book has " + c.getNoCopies());
+		}
+		// Move into the service
 		LocalDate todaysDate = LocalDate.now();
 		LocalDate dueDate = todaysDate.plusDays(7);
 		Loan loan = new Loan(checkOutBookId, branchChoice, cardNo, todaysDate, dueDate, null);
 		boolean bookCheckOut = bs.checkOutBook(loan);
 		if (!bookCheckOut) {
 			System.out.println("Book has been successfully checked out...");
+
 		} else {
 			System.out.println("You've already checked out this book at this branch");
 			Borr1();
